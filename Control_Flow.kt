@@ -30,9 +30,8 @@ enum class CardType : ICardLimit {
 
 fun main() {
     var creditLimit = ""
-    var num: String?
 
-    do {
+    while (true) {
         println("=================================")
         println("              MENU               ")
         println("=================================")
@@ -41,7 +40,7 @@ fun main() {
         println("3. Exit")
         println("=================================")
         print("Pick a menu : ")
-        num = readLine()
+        val num = readLine()
 
         when (num) {
             "1" -> {
@@ -49,10 +48,10 @@ fun main() {
                 creditLimit = buy()
             }
             "2" -> {
-                if (creditLimit == ""){
+                if (creditLimit == "") {
                     println("\n\n\n")
                     println("Please Get Your Card First")
-                }else {
+                } else {
                     println("\n\n\n")
                     println("=================================")
                     println("           Your Card")
@@ -60,9 +59,8 @@ fun main() {
                     println(creditLimit)
                     println("=================================")
                     println("press any button to continue")
-                    readln()
+                    readLine()
                     println("\n\n\n")
-
                 }
             }
             "3" -> {
@@ -76,15 +74,11 @@ fun main() {
                 println("Please select the correct option")
             }
         }
-    } while (true)
+    }
 }
 
 fun buy(): String {
-    var buyCredit = ""
-    var bought: String?
-    var pick: String?
-
-    do {
+    while (true) {
         println("=================================")
         println("           CARD LIST           ")
         println("=================================")
@@ -95,107 +89,49 @@ fun buy(): String {
         println("4. Back")
         println("=================================")
         print("Select a Card or Menu : ")
-        bought = readLine()
+        val bought = readLine()
 
         when (bought) {
-            "1" -> {
+            "1", "2", "3" -> {
                 println("\n\n\n")
-                println("=================================")
-                println("           CARD INFO             ")
-                println("=================================")
-                println(CardType.SILVER.getCreditInfo())
-                println("=================================")
-                println("1. Get")
-                println("2. Back")
-                println("=================================")
-                print("Select an option : ")
-                pick = readLine()
-
-                when (pick) {
-                    "1" -> {
-                        println("\n\n\n")
-                        println("Successfully Change The Card")
-                        buyCredit = CardType.SILVER.getCreditInfo()
-                        return buyCredit
-                    }
-                    "2" -> {
-                        println("\n\n\n")
-                        buy()
-                    }
-                    else -> {
-                        println("\n\n\n")
-                        println("=================================")
-                        println("Please choose the correct option")
-                        buy()
-                    }
+                val cardType = when (bought) {
+                    "1" -> CardType.SILVER
+                    "2" -> CardType.GOLD
+                    else -> CardType.PLATINUM
                 }
-            }
-            "2" -> {
-                println("\n\n\n")
                 println("=================================")
                 println("           CARD INFO             ")
                 println("=================================")
-                println(CardType.GOLD.getCreditInfo())
+                println(cardType.getCreditInfo())
                 println("=================================")
                 println("1. Get")
                 println("2. Back")
                 println("=================================")
                 print("Select an option : ")
-                pick = readLine()
+                val pick = readLine()
 
                 when (pick) {
                     "1" -> {
                         println("\n\n\n")
                         println("Successfully Change The Card")
-                        buyCredit = CardType.GOLD.getCreditInfo()
-                        return buyCredit
+                        return cardType.getCreditInfo()
                     }
                     "2" -> {
                         println("\n\n\n")
-                        buy()
+                        // Return an empty string or some other appropriate value here.
+                        return ""
                     }
                     else -> {
                         println("\n\n\n")
                         println("=================================")
                         println("Please choose the correct option")
-                        buy()
-                    }
-                }            }
-            "3" -> {
-                println("\n\n\n")
-                println("=================================")
-                println("           CARD INFO             ")
-                println("=================================")
-                println(CardType.PLATINUM.getCreditInfo())
-                println("=================================")
-                println("1. Get")
-                println("2. Back")
-                println("=================================")
-                print("Select an option : ")
-                pick = readLine()
-
-                when (pick) {
-                    "1" -> {
-                        println("\n\n\n")
-                        println("Successfully Change The Card")
-                        buyCredit = CardType.PLATINUM.getCreditInfo()
-                        return buyCredit
-                    }
-                    "2" -> {
-                        println("\n\n\n")
-                        buy()
-                    }
-                    else -> {
-                        println("\n\n\n")
-                        println("=================================")
-                        println("Please choose the correct option")
-                        buy()
                     }
                 }
             }
             "4" -> {
                 println("\n\n\n")
-                return "" // Return an empty string or some other appropriate value here.
+                // Return an empty string or some other appropriate value here.
+                return ""
             }
             else -> {
                 println("\n\n\n")
@@ -203,6 +139,5 @@ fun buy(): String {
                 println("Please select the correct option")
             }
         }
-    } while (true)
-
+    }
 }
